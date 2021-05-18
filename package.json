@@ -4,7 +4,7 @@
   "description": "Hackaton - Xubio",
   "main": "server.js",
   "scripts": {
-    "start": "node start ./server.js",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ndri",
