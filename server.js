@@ -5,6 +5,8 @@ const app = express();
 const httpServer = require("http").Server(app);
 const io = require("socket.io")(httpServer);
 
+const PORT = process.env.PORT || 3977;
+
 let roomsList = [];
 
 app.use(express.static("."));
@@ -70,4 +72,6 @@ io.on("connection", (socket) => {
   });
 });
 
-httpServer.listen(3779);
+httpServer.listen(PORT, () => {
+  console.log(PORT);
+});
