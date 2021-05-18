@@ -1,5 +1,4 @@
-const PORT = process.env.PORT || 3977;
-const socket = io.connect(`https://xubio.herokuapp.com:${PORT}`);
+const socket = io.connect("https://xubio.herokuapp.com:" + location.port);
 var player, game;
 
 init = () => {
