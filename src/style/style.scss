@@ -154,6 +154,21 @@ body {
           .newGame {
             margin: auto;
             width: 100%;
+            button {
+              width: 100px;
+              height: 30px;
+              background-color: #004874;
+              border: none;
+              cursor: pointer;
+              border-radius: 5px;
+              color: #fff;
+              font-weight: 600;
+              box-shadow: 5px 5px 20px 0px rgb(0 0 0 / 75%);
+              transition: 0.3s;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
           }
           #line {
             margin: 30px 0;
@@ -173,18 +188,6 @@ body {
                 cursor: pointer;
               }
             }
-          }
-
-          button {
-            width: 100px;
-            height: 30px;
-            background-color: #004874;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            color: #fff;
-            font-weight: 600;
-            box-shadow: 5px 5px 20px 0px rgb(0 0 0 / 75%);
           }
         }
       }
@@ -253,14 +256,3 @@ body {
     width: 670px;
   }
 }
-// @media screen and (min-width: 576px) and (max-width: 767.98px) {
-//   body .container .wrap .room {
-//     max-width: 60%;
-//   }
-// }
-
-// @media screen and (max-width: 575.98px) {
-//   body .container .wrap .room {
-//     max-width: 80%;
-//   }
-// }
