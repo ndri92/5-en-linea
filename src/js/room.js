@@ -5,32 +5,39 @@ init = () => {
   const p1Color = "white";
   const p2Color = "black";
 
+  setInterval(() => {
+    socket.emit("rooms");
+  }, 3000);
+
+  $(".rooms").on("click", (e) => {
+    const room = e.target.innerText;
+
+    player = new Player(p2Color);
+    socket.emit("join", { room: room });
+  });
+
   $("#new").on("click", () => {
     player = new Player(p1Color);
     socket.emit("create");
   });
 
-  $("#join").on("click", () => {
-    const room = $("#room").val();
+  $("#return").on("click", function () {
+    const room = $(this).text().slice(12, 16);
 
-    if (!room) {
-      alert("Ingresa el ID de la partida");
-      return;
-    }
-    player = new Player(p2Color);
-    socket.emit("join", { room: room });
-  });
-
-  $("#return").on("click", () => {
-    var text = $("#roomID").text();
-    var room = text.slice(12, 16);
-
-    socket.emit("remove", { room: room });
+    socket.emit("end", { room: room });
     location.reload();
   });
 
+  socket.on("listGame", (data) => {
+    $(".rooms").empty();
+
+    data.list.forEach((e) => {
+      $(".rooms").append(`<h5>${e}</h5>`);
+    });
+  });
+
   socket.on("newGame", (data) => {
-    const message = "Partida ID: " + data.room;
+    const message = "Game ID: " + data.room;
 
     game = new Game(data.room);
     game.displayBoard(message);

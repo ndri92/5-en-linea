@@ -4,40 +4,67 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>5 en Linea - Xubio</title>
-    <link rel="stylesheet" href="../css/style.css" />
+    <title>Cinco en Linea - Xubio</title>
+    <link rel="shortcut icon" href="../image/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../style/style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="room">
-        <h1 id="title">5 en Linea</h1>
+    <div class="background-gradient container">
+      <div class="wrap">
+        <header>
+          <svg
+            id="return"
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M26.25 45C26.25 38.7891 21.2109 33.75 15 33.75C8.78906 33.75 3.75 38.7891 3.75 45C3.75 51.2109 8.78906 56.25 15 56.25C21.2109 56.25 26.25 51.2109 26.25 45Z"
+              stroke="white"
+              stroke-miterlimit="10"
+            />
+            <path
+              d="M10.6072 15H20.0391M14.6121 19.6875L9.96094 15L14.6121 10.3125V19.6875Z"
+              stroke="#D6D6D6"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
 
-        <div id="form">
-          <div class="newGame">
-            <h4>Nuevo Juego</h4>
-            <button id="new">Crear Partida</button>
+          <div class="logo">
+            <img id="logo" src="../image/favicon.png" />
+            <h1 id="title">Cinco en Linea</h1>
+            <h3 id="description">
+              by <a href="https://github.com/ndri92/">Nicolás Dri</a> ·
+              <img src="../image/logo-github.svg" />
+            </h3>
           </div>
 
-          <div class="joinGame">
-            <h4>Conectarse</h4>
-            <input
-              type="text"
-              name="room"
-              id="room"
-              placeholder="Ingresa el ID"
-              required
-            />
-            <button id="join">Ingresar</button>
+          <h2 id="roomID"></h2>
+        </header>
+
+        <div id="result"></div>
+
+        <div class="room">
+          <div id="form">
+            <div class="newGame">
+              <button id="new">Crear Partida</button>
+            </div>
+            <div id="line"></div>
+            <div class="joinGame">
+              <h4>Conectarse</h4>
+              <div class="rooms"></div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="game">
-        <h2 id="roomID"></h2>
-        <h3 id="turn"></h3>
-        <div class="table"></div>
-        <div id="timer">Espera tu turno</div>
-        <button id="return">Volver</button>
+        <div class="game">
+          <div class="table"></div>
+          <h3 id="turn"></h3>
+        </div>
       </div>
     </div>
 

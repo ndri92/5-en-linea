@@ -8,20 +8,21 @@ class Game {
   }
 
   createGameBoard() {
-    function clickHandler() {
+    function clickHandler(e) {
       let row, col;
 
-      row = game.getRow(this.id);
-      col = game.getCol(this.id);
+      row = game.getRow(e.target.id);
+      col = game.getCol(e.target.id);
 
       if (!player.getTurn() || !game) {
         alert("Espera tu turno");
         return;
       }
 
-      game.playTurn(this);
-      game.updateBoard(player.getColor(), row, col, this.id);
+      $(".table").css("background-color", "#c5c1bd");
 
+      game.playTurn(e.target);
+      game.updateBoard(player.getColor(), row, col, e.target.id);
       game.checkWinner();
 
       player.setTurn(false);
@@ -37,29 +38,33 @@ class Game {
   createTiles(clickHandler) {
     for (let i = 0; i < 15; i++) {
       for (let j = 0; j < 14; j++) {
-        $(".table").append(
-          `<button class="tile" id="button_${i}_${j}"></button>`
-        );
+        $(".table").append(`<button class="tile" id="${i}_${j}"></button>`);
       }
       $(".table").append(
-        `<button class="tile" id="button_${i}_14" style="float:none;"/>`
+        `<button class="tile" id="${i}_14" style="float:none;"/>`
       );
     }
 
     for (let i = 0; i < 15; i++) {
       this.board.push([""]);
       for (let j = 0; j < 15; j++) {
-        $(`#button_${i}_${j}`).on("click", clickHandler);
+        $(`#${i}_${j}`).on("click", clickHandler);
       }
     }
   }
 
   setTimer() {
-    $("#timer").text("Tiempo restante: " + player.getTime());
-
     timer = setInterval(() => {
-      player.time--;
-      $("#timer").text("Tiempo restante: " + player.getTime());
+      var time = player.getTime();
+
+      if (time == 7 || time == 5 || time <= 3) {
+        $(".table").css("background-color", "#d33473");
+      } else {
+        $(".table").css("background-color", "#c5c1bd");
+      }
+
+      --player.time;
+
       if (player.getTime() == 0) {
         let message;
 
@@ -78,6 +83,9 @@ class Game {
 
   displayBoard(message) {
     $(".room").css("display", "none");
+    $("header").addClass("order");
+    $("#return").css("display", "block");
+    $("#logo").css("display", "none");
     $(".game").css("display", "block");
     $("#roomID").html(message);
     this.createGameBoard();
@@ -85,7 +93,6 @@ class Game {
 
   updateBoard(color, row, col, tile) {
     clearInterval(timer);
-    $("#timer").text("Espera tu turno");
     $(".table").prop("disabled", true);
     if (!player.getTurn()) {
       game.setTimer();
@@ -99,22 +106,12 @@ class Game {
   }
 
   getRow(id) {
-    let row;
-    if (id.split("_")[1][1] != undefined) {
-      row = id.split("_")[1][0] + id.split("_")[1][1];
-    } else {
-      row = id.split("_")[1][0];
-    }
+    let row = id.split("_")[0];
     return row;
   }
 
   getCol(id) {
-    let col;
-    if (id.split("_")[2][1] != undefined) {
-      col = id.split("_")[2][0] + id.split("_")[2][1];
-    } else {
-      col = id.split("_")[2][0];
-    }
+    let col = id.split("_")[1];
     return col;
   }
 
@@ -136,26 +133,39 @@ class Game {
     $(".tile").attr("disabled", true);
 
     if (message == player.color) {
-      $("#timer").text("¡Ganaste!");
+      message = "ganaste";
+      printMessage();
     } else if (message.includes("desconectado")) {
-      $("#timer").text(message);
+      $("#turn").text(message);
     } else if (message.includes("Empate")) {
-      $("#timer").text(message);
+      message = "empate";
+      printMessage();
     } else {
-      $("#timer").text("¡Perdiste!");
+      message = "perdiste";
+      printMessage();
+    }
+
+    function printMessage() {
+      const value = message.split("");
+      $("#turn").css("opacity", 0);
+
+      value.forEach((e) => {
+        $("#result").append(`<h1>${e}</h1>`);
+      });
+      $("#result").css("display", "flex");
     }
   }
 
   horizontal(color) {
+    let value;
     for (let row = 0; row < 15; row++) {
-      let value = 0;
+      value = 0;
       for (let col = 0; col < 15; col++) {
         if (game.board[row][col] != color) {
           value = 0;
         } else {
           value++;
         }
-
         if (value == 5) {
           this.winner();
           return;
@@ -165,8 +175,9 @@ class Game {
   }
 
   vertical(color) {
+    let value;
     for (let col = 0; col < 15; col++) {
-      let value = 0;
+      value = 0;
       for (let row = 0; row < 15; row++) {
         if (game.board[row][col] != color) {
           value = 0;
@@ -215,10 +226,12 @@ class Game {
   }
 
   checkWinner() {
-    this.horizontal(player.getColor()[0]);
-    this.vertical(player.getColor()[0]);
-    this.diagonal(player.getColor()[0]);
-    this.diagonalReverse(player.getColor()[0]);
+    let color = player.getColor()[0];
+
+    this.horizontal(color);
+    this.vertical(color);
+    this.diagonal(color);
+    this.diagonalReverse(color);
 
     if (this.checkDraw()) {
       const message = "¡Empate!";

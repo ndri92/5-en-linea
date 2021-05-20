@@ -1,10 +1,10 @@
 {
-  "name": "5-en-linea",
+  "name": "cinco-en-linea",
   "version": "1.0.0",
   "description": "Hackaton - Xubio",
   "main": "server.js",
   "scripts": {
-    "start": "node ./server.js",
+    "start": "nodemon ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ndri",
