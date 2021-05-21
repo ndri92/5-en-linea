@@ -4,12 +4,13 @@
   "description": "Hackaton - Xubio",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server.js",
+    "start": "node ./server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ndri",
   "license": "ISC",
   "dependencies": {
+    "animejs": "^3.2.1",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
     "socket.io": "^1.7.1"

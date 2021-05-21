@@ -15,11 +15,10 @@ class Game {
       col = game.getCol(e.target.id);
 
       if (!player.getTurn() || !game) {
-        alert("Espera tu turno");
         return;
       }
 
-      $(".table").css("background-color", "#c5c1bd");
+      $(".table").removeAttr("style");
 
       game.playTurn(e.target);
       game.updateBoard(player.getColor(), row, col, e.target.id);
@@ -58,9 +57,11 @@ class Game {
       var time = player.getTime();
 
       if (time == 7 || time == 5 || time <= 3) {
-        $(".table").css("background-color", "#d33473");
+        $(".table")
+          .css("background-color", "#d33473")
+          .css("box-shadow", "0px 0px 30px 5px rgb(211 52 115 / 75%)");
       } else {
-        $(".table").css("background-color", "#c5c1bd");
+        $(".table").removeAttr("style");
       }
 
       --player.time;

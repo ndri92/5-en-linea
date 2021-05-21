@@ -5,13 +5,6 @@ class Player {
     this.time = 15;
   }
 
-  setTurn(turn) {
-    this.currentTurn = turn;
-    this.time = 15;
-    const message = turn ? "Es tu turno" : "Espera a tu oponente";
-    $("#turn").text(message);
-  }
-
   getColor() {
     return this.color;
   }
@@ -22,5 +15,17 @@ class Player {
 
   getTurn() {
     return this.currentTurn;
+  }
+
+  setTurn(turn) {
+    this.currentTurn = turn;
+    this.time = 15;
+    if (turn) {
+      $("#turn").text("Es tu turno");
+    } else {
+      $("#turn")
+        .text("Espera a tu oponente")
+        .append(`<div class="dot-typing"></div>`);
+    }
   }
 }

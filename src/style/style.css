@@ -201,6 +201,26 @@ body .container .wrap .game #turn {
   font-family: circe-bold, Arial, Helvetica, sans-serif;
   font-weight: 600;
   color: #d6d6d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+body .container .wrap .game #turn > div {
+  position: relative;
+  left: -9999px;
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #d6d6d6;
+  color: #d6d6d6;
+  margin-left: 25px;
+  box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+}
+body .container .wrap .game #turn .dot-carousel {
+  animation: dotCarousel 1.5s infinite linear;
+}
+body .container .wrap .game #turn .dot-typing {
+  animation: dotTyping 1.5s infinite linear;
 }
 
 /*  ==============================================  */
@@ -215,6 +235,40 @@ body .container .wrap .game #turn {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+@keyframes dotCarousel {
+  0% {
+    box-shadow: 9984px 0 0 -1px #d6d6d6, 9999px 0 0 1px #d6d6d6, 10014px 0 0 -1px #d6d6d6;
+  }
+  50% {
+    box-shadow: 10014px 0 0 -1px #d6d6d6, 9984px 0 0 -1px #d6d6d6, 9999px 0 0 1px #d6d6d6;
+  }
+  100% {
+    box-shadow: 9999px 0 0 1px #d6d6d6, 10014px 0 0 -1px #d6d6d6, 9984px 0 0 -1px #d6d6d6;
+  }
+}
+@keyframes dotTyping {
+  0% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+  }
+  16.667% {
+    box-shadow: 9984px -10px 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+  }
+  33.333% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+  }
+  50% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px -10px 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+  }
+  66.667% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
+  }
+  83.333% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px -10px 0 0 #d6d6d6;
+  }
+  100% {
+    box-shadow: 9984px 0 0 0 #d6d6d6, 9999px 0 0 0 #d6d6d6, 10014px 0 0 0 #d6d6d6;
   }
 }
 @keyframes result {
